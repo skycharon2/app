@@ -3,6 +3,23 @@ import PyPDF2
 import openai
 from io import BytesIO
 import requests
+import streamlit as st
+
+# Add balloons effect
+st.balloons()
+
+import streamlit as st
+
+# Apply CSS styling to the chat window container
+st.markdown("""
+<style>
+    .chat-container {
+        height: 300px;
+        overflow-y: scroll;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 
 # Custom styling
 st.markdown("""
@@ -16,13 +33,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+import PyPDF2
+import streamlit as st
+
 # Sidebar
-st.sidebar.markdown("### PDF Text Extractor")
 uploaded_file = st.sidebar.file_uploader("Choose a PDF file", type="pdf")
 
 if uploaded_file:
-    reader = PyPDF2.PdfFileReader(uploaded_file)
-    text = " ".join([reader.getPage(i).extract_text() for i in range(reader.numPages)])
+    reader = PyPDF2.PdfReader(uploaded_file)
+    text = " ".join([page.extract_text() for page in reader.pages])
     st.sidebar.text_area("Extracted text:", text)
 
 # Spacer to move the username and email input down
