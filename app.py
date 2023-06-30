@@ -79,7 +79,13 @@ if uploaded_file:
     st.sidebar.text_area("Extracted text:", extracted_text)
 
 # Main Content
-st.image("/Users/nana/Desktop/logo.png", width=400)
+import streamlit as st
+
+image_path = "/Users/nana/Desktop/logo.png"
+
+# Display the image
+st.image(image_path, caption="Image Caption", width=400)
+
 
 # Spacer
 st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
