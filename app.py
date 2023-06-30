@@ -95,8 +95,6 @@ import openai
 
 openai.api_key = "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"
 
-user_input = st.text_input('Ask me anything!', key='user_input')
-
 if user_input:
 user_input = st.text_input('Ask me anything!', key='user_input')
 
