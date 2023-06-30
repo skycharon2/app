@@ -86,7 +86,7 @@ import streamlit as st
 
 image_url = "https://i.imgur.com/bBejMa7.png"
 # Display the image
-st.image(image_url, caption="Image Caption", width=400)
+st.image(image_url, width=400)
 
 # Display the image
 #st.image(image_path, caption="Image Caption", width=400)
