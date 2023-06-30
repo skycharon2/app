@@ -1,7 +1,9 @@
 import streamlit as st
 import sqlite3
+import PyPDF2
+import openai
 
-# Create SQLite database and table if not exist
+# Database
 conn = sqlite3.connect('user_data.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, email TEXT, password TEXT)''')
@@ -31,7 +33,8 @@ if 'logged_in' not in st.session_state:
 
 # Sidebar for Login and Registration
 if st.session_state['logged_in']:
-    st.sidebar.write("Logged in!")
+    username = st.session_state['username']
+    st.sidebar.write(f"Logged in as {username}!")
     
     if st.sidebar.button("Logout"):
         st.session_state['logged_in'] = False
@@ -42,6 +45,7 @@ else:
     if st.sidebar.button("Login"):
         if login(username, password):
             st.session_state['logged_in'] = True
+            st.session_state['username'] = username
         else:
             st.sidebar.write("Invalid credentials")
             
@@ -49,6 +53,7 @@ else:
         email = st.sidebar.text_input("Email")
         register_user(username, email, password)
 
+<<<<<<< HEAD
 import streamlit as st
 import PyPDF2
 import openai
@@ -66,25 +71,19 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+=======
+>>>>>>> 8b557a5 (Resolved merge conflicts)
 # PDF Extraction Function
 def extract_text_from_pdf(file):
     reader = PyPDF2.PdfReader(file)
     return " ".join([page.extract_text() for page in reader.pages])
 
-# Sidebar
+# Sidebar for PDF upload
 uploaded_file = st.sidebar.file_uploader("Choose a PDF file", type="pdf")
 
 if uploaded_file:
     extracted_text = extract_text_from_pdf(uploaded_file)
     st.sidebar.text_area("Extracted text:", extracted_text)
-
-# Spacer to move the username and email input down
-st.sidebar.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
-
-# Username and email at the bottom-left corner
-username = st.sidebar.text_input("Enter your name:")
-email = st.sidebar.text_input("Enter your email:")
-st.sidebar.markdown(f"Welcome, {username}!")
 
 # Main Content
 st.image("/Users/nana/Desktop/logo.png", width=400)
@@ -92,7 +91,10 @@ st.image("/Users/nana/Desktop/logo.png", width=400)
 # Spacer
 st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
+# OpenAI
+openai.api_key = "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"
 
+<<<<<<< HEAD
 import streamlit as st
 import openai
 
@@ -101,13 +103,20 @@ openai.api_key = "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"
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 if user_input:
+=======
+user_input = st.text_input('Ask me anything!', key='user_input')
+
+try:
+>>>>>>> 8b557a5 (Resolved merge conflicts)
     response = openai.Completion.create(engine="davinci", prompt=user_input, max_tokens=50)
     st.write(f"🐶: {response.choices[0].text}")
-
+except Exception as e:
+    st.write(f"Error: {str(e)}")
 
 # Adding a Footer with Username and Email
 st.markdown(f"""
     <footer style="position: fixed; left: 10px; bottom: 10px; color: white; background-color: rgba(0,0,0,0.1); padding: 10px; border-radius: 5px;">
-        User: {username}
+        User: {username if st.session_state['logged_in'] else 'Guest'}
     </footer>
 """, unsafe_allow_html=True)
+
