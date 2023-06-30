@@ -53,10 +53,6 @@ else:
         email = st.sidebar.text_input("Email")
         register_user(username, email, password)
 
-import streamlit as st
-import PyPDF2
-import openai
-
 # Add balloons effect
 st.balloons()
 
@@ -90,12 +86,7 @@ st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", 
 
 # OpenAI
 openai.api_key = "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"
-import streamlit as st
-import openai
 
-openai.api_key = "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"
-
-if user_input:
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 try:
@@ -110,4 +101,5 @@ st.markdown(f"""
         User: {username if st.session_state['logged_in'] else 'Guest'}
     </footer>
 """, unsafe_allow_html=True)
+
 
