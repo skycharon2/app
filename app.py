@@ -84,8 +84,7 @@ import streamlit as st
 #image_path = "/Users/nana/Desktop/logo.png"
 import streamlit as st
 
-image_url = "https://imgur.com/bBejMa7"
-
+image_url = "https://i.imgur.com/bBejMa7.png"
 # Display the image
 st.image(image_url, caption="Image Caption", width=400)
 
