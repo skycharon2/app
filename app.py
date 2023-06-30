@@ -81,10 +81,16 @@ if uploaded_file:
 # Main Content
 import streamlit as st
 
-image_path = "/Users/nana/Desktop/logo.png"
+#image_path = "/Users/nana/Desktop/logo.png"
+import streamlit as st
+
+image_url = "https://imgur.com/bBejMa7"
 
 # Display the image
-st.image(image_path, caption="Image Caption", width=400)
+st.image(image_url, caption="Image Caption", width=400)
+
+# Display the image
+#st.image(image_path, caption="Image Caption", width=400)
 
 
 # Spacer
