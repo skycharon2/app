@@ -53,7 +53,6 @@ else:
         email = st.sidebar.text_input("Email")
         register_user(username, email, password)
 
-<<<<<<< HEAD
 import streamlit as st
 import PyPDF2
 import openai
@@ -71,8 +70,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-=======
->>>>>>> 8b557a5 (Resolved merge conflicts)
 # PDF Extraction Function
 def extract_text_from_pdf(file):
     reader = PyPDF2.PdfReader(file)
@@ -93,8 +90,6 @@ st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", 
 
 # OpenAI
 openai.api_key = "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"
-
-<<<<<<< HEAD
 import streamlit as st
 import openai
 
@@ -103,11 +98,9 @@ openai.api_key = "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"
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 if user_input:
-=======
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 try:
->>>>>>> 8b557a5 (Resolved merge conflicts)
     response = openai.Completion.create(engine="davinci", prompt=user_input, max_tokens=50)
     st.write(f"🐶: {response.choices[0].text}")
 except Exception as e:
