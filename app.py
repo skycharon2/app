@@ -85,7 +85,7 @@ st.image("/Users/nana/Desktop/logo.png", width=400)
 st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
 # OpenAI
-openai.api_key = "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"
+openai.api_key = "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"
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 try:
