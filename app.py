@@ -49,9 +49,6 @@ else:
         email = st.sidebar.text_input("Email")
         register_user(username, email, password)
 
-# Rest of the code can go here (extracting PDF, calling GPT API, etc.)
-
-
 import streamlit as st
 import PyPDF2
 import openai
@@ -99,13 +96,10 @@ st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", 
 import streamlit as st
 import openai
 
-# Set your OpenAI API key
 openai.api_key = "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"
 
-# Create a text input for user query
 user_input = st.text_input('Ask me anything!', key='user_input')
 
-# Dummy response - here you can call the ChatGPT API for a real response
 if user_input:
     response = openai.Completion.create(engine="davinci", prompt=user_input, max_tokens=50)
     st.write(f"🐶: {response.choices[0].text}")
