@@ -1,3 +1,4 @@
+
 import streamlit as st
 import sqlite3
 import PyPDF2
@@ -71,6 +72,11 @@ def extract_text_from_pdf(file):
     reader = PyPDF2.PdfReader(file)
     return " ".join([page.extract_text() for page in reader.pages])
 
+# OpenAI
+
+openai.api_key = "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"
+
+
 # Sidebar for PDF upload
 uploaded_file = st.sidebar.file_uploader("Choose a PDF file", type="pdf")
 
@@ -79,31 +85,29 @@ if uploaded_file:
     st.sidebar.text_area("Extracted text:", extracted_text)
 
 # Main Content
-import streamlit as st
-
-#image_path = "/Users/nana/Desktop/logo.png"
-import streamlit as st
-
 image_url = "https://i.imgur.com/bBejMa7.png"
-# Display the image
 st.image(image_url, width=400)
-
-# Display the image
-#st.image(image_path, caption="Image Caption", width=400)
-
 
 # Spacer
 st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
 # OpenAI
-openai.api_key = "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"
 user_input = st.text_input('Ask me anything!', key='user_input')
 
-try:
-    response = openai.Completion.create(engine="davinci", prompt=user_input, max_tokens=50)
-    st.write(f"🐶: {response.choices[0].text}")
-except Exception as e:
-    st.write(f"Error: {str(e)}")
+if user_input:
+    if uploaded_file:
+        prompt = extracted_text + "\nUser: " + user_input + "\nAI:"
+    else:
+        prompt = "\nUser: " + user_input + "\nAI:"
+    
+    try:
+        response = openai.Completion.create(engine="davinci", prompt=prompt, max_tokens=50)
+        if response.choices and response.choices[0].text:
+            st.write(f"🐶: {response.choices[0].text}")
+        else:
+            st.write("No response from the model.")
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
 
 # Adding a Footer with Username and Email
 st.markdown(f"""
@@ -111,5 +115,3 @@ st.markdown(f"""
         User: {username if st.session_state['logged_in'] else 'Guest'}
     </footer>
 """, unsafe_allow_html=True)
-
-
