@@ -96,7 +96,7 @@ st.image(image_url, width=400)
 st.markdown("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>", unsafe_allow_html=True)
 
 # OpenAI
-openai.api_key = "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"
+openai.api_key = "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"
 user_input = st.text_input('Ask me anything!', key='user_input')
 
 try:
